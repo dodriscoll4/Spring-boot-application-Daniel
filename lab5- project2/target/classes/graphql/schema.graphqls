@@ -1,0 +1,42 @@
+type Pet {
+    id: Int
+    name: String
+    animalType: String
+    breed: String
+    age: Int
+    household: Household
+}
+
+type Household {
+    eircode: String
+    numberOfOccupants: Int
+    maxNumberOfOccupants: Int
+    ownerOccupied: Boolean
+    pets: [Pet]
+}
+type PetStatistics {
+    averageAge: Float
+    oldestAge: Int
+    totalCount: Int
+}
+
+type Query {
+    findAllHouseholds: [Household]
+    findHouseholdByEircode(eircode: String!): Household
+    findPetById(petId: Int!): Pet
+    findPetsByAnimalType(animalType: String!): [Pet]
+    getPetStatistics: PetStatistics
+}
+
+input AddHousehold {
+    eircode: String!
+    numberOfOccupants: Int!
+    maxNumberOfOccupants: Int!
+    ownerOccupied: Boolean!
+}
+
+type Mutation {
+    createHousehold(household: AddHousehold!): Household
+    deleteHousehold(eircode: String!): String
+    deletePet(petId: Int!): String
+}
